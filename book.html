@@ -3,11 +3,14 @@
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="Schedule a conversation with Prince Saah about AI consulting and digital product ideas.">
+  <meta property="og:title" content="Book a conversation | Create With Prince">
+  <meta property="og:description" content="Schedule a conversation with Prince Saah about AI consulting and digital product ideas.">
+  <meta property="og:type" content="website"><meta property="og:url" content="https://createwithprince.com/book.html">
   <link rel="canonical" href="https://createwithprince.com/book.html">
   <title>Book a conversation | Create With Prince</title>
-  <link rel="stylesheet" href="booking.css">
+  <link rel="stylesheet" href="booking.css?v=20261124-mobile">
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
-  <script src="booking.js" defer></script>
+  <script src="booking.js?v=20261124-mobile" defer></script>
 </head>
 <body>
 <header><a href="./">Create With Prince</a><a href="./contact.html">Send a message</a></header>
@@ -21,6 +24,9 @@
       <div class="section-line"><p class="eyebrow">02 / Your details</p><p id="selected" class="chosen"></p></div>
       <label for="name">Your name</label><input id="name" name="name" autocomplete="name" maxlength="120" required>
       <label for="email">Your email</label><input id="email" name="email" type="email" autocomplete="email" maxlength="254" required>
+      <label for="purpose">What would you like to discuss? <span class="optional">Optional</span></label>
+      <textarea id="purpose" name="purpose" maxlength="1500" rows="4" aria-describedby="purpose-note"></textarea>
+      <p id="purpose-note" class="note">Your message will be included in the calendar invitation.</p>
       <div class="trap" aria-hidden="true"><label for="website">Leave this field empty</label><input id="website" name="website" tabindex="-1" autocomplete="off"></div>
       <div id="verification"></div><p id="booking-status" role="status" aria-live="polite"></p><button id="submit" type="submit" disabled>Confirm meeting <span aria-hidden="true">↗</span></button>
     </form>
