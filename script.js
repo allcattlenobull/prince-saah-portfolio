@@ -14,7 +14,8 @@ const projects = [
     problem: 'How can a small practice keep its business organized?',
     category: 'Small business operations', title: 'Mwana Therapy', status: 'Deployed',
     description: 'A practical administrative workspace for a small therapy practice, bringing transactions, linked accounting records, and a general ledger into one place.',
-    detail: 'Built and refined with AI assistance around the day-to-day needs of the practice.'
+    detail: 'Built and refined with AI assistance around the day-to-day needs of the practice.',
+    url: 'https://www.mwanatherapy.com/', linkText: 'Visit Mwana Therapy'
   },
   {
     id: 'called', tint: '#fff4e2',
@@ -29,14 +30,16 @@ const projects = [
     problem: 'How can research lead to clearer decisions?',
     category: 'Investment research', title: 'All Cattle No Bull', status: 'Ongoing',
     description: 'An independent portfolio management platform combining structured market analysis, research workflows, and AI-assisted decision support.',
-    detail: 'A place to bring research, data, and a disciplined decision process together.'
+    detail: 'A place to bring research, data, and a disciplined decision process together.',
+    url: 'https://allcattlenobull.com/', linkText: 'Visit All Cattle No Bull'
   },
   {
     id: 'him', tint: '#ffeded',
     problem: 'What if a league had its own home for data and stories?',
-    category: 'Sports and data', title: 'HIM Dynasty', status: 'Ongoing',
-    description: 'A fantasy football league experience bringing standings, league history, trade tools, and player analysis together.',
-    detail: 'Designed to give a community a more engaging way to explore its league.'
+    category: 'Sports and data', title: 'The Edge', status: 'Live',
+    description: 'A fantasy football platform bringing league sites, draft rooms, trade tools, and player analysis together.',
+    detail: 'Built to give fantasy communities a home for their leagues and tools for their decisions.',
+    url: 'https://theedge.football/', linkText: 'Visit The Edge'
   },
   {
     id: 'me', tint: '#ffffff',
@@ -66,6 +69,49 @@ function h(tag, props = {}, ...kids) {
   }
   kids.flat().forEach(k => k != null && el.append(k));
   return el;
+}
+
+// Captured from the actual projects in November 2026. Private figures are concealed.
+const PROJECT_SCREENS = {
+  hiring: [
+    { label: 'Role intake · pilot demo', src: 'assets/screens/umn-intake.png' },
+    { label: 'Job classification · pilot demo', src: 'assets/screens/umn-classification.png' }
+  ],
+  mwana: [
+    { label: 'Public website', src: 'assets/screens/mwana-home.png' },
+    { label: 'Website editor · admin portal', src: 'assets/screens/mwana-editor.png' },
+    { label: 'Practice finances · amounts hidden', src: 'assets/screens/mwana-finance.png' }
+  ],
+  acnb: [
+    { label: 'Public homepage', src: 'assets/screens/acnb-home.png' },
+    { label: 'Fund overview · figures hidden', src: 'assets/screens/acnb-dashboard.png' },
+    { label: 'Inside the workspace · how it works', src: 'assets/screens/acnb-workspace.png' }
+  ],
+  him: [
+    { label: 'The Edge homepage', src: 'assets/screens/the-edge-home.png' },
+    { label: 'Fantasy tools', src: 'assets/screens/the-edge-tools.png' },
+    { label: 'Trade calculator', src: 'assets/screens/the-edge-trade.png' }
+  ]
+};
+
+function buildProjectScreens(id) {
+  const items = PROJECT_SCREENS[id];
+  if (!items) return null;
+  const note = id === 'hiring'
+    ? 'Screens from the local pilot demo, using sample data.'
+    : (id === 'mwana' || id === 'acnb')
+      ? 'Screens captured in November 2026. Private financial figures are hidden.'
+      : 'Screens captured from the live site in November 2026.';
+  return h('section', { className: 'real-views', style: '--d:6', 'aria-label': 'Project screenshots' },
+    h('p', { className: 'real-views-kicker' }, 'INSIDE THE PROJECT'),
+    h('p', { className: 'real-views-note' }, note),
+    ...items.map(item => h('figure', { className: 'project-screen' },
+      h('a', { href: item.src, target: '_blank', rel: 'noopener noreferrer', 'aria-label': `Open full-size image: ${item.label}` },
+        h('img', { src: item.src, alt: item.label, loading: 'lazy' })
+      ),
+      h('figcaption', {}, item.label, h('span', { 'aria-hidden': 'true' }, '↗'))
+    ))
+  );
 }
 
 // Public pages are live project views, never reconstructed interface graphics.
@@ -186,6 +232,7 @@ let openIndex = -1;
 let pushed = false;
 
 function fill(p) {
+  const screens = buildProjectScreens(p.id);
   const views = buildProjectViews(p.id);
   sol.replaceChildren(...[
     h('div', { className: 'sol-q-wrap', style: '--d:0' }, h('p', { className: 'sol-q' }, p.problem)),
@@ -196,6 +243,7 @@ function fill(p) {
     h('h2', { id: 'sol-title', style: '--d:3' }, p.title),
     h('p', { className: 'sol-lead', style: '--d:4' }, p.description),
     h('p', { className: 'sol-detail', style: '--d:5' }, p.detail),
+    screens,
     views,
     p.url ? h('div', { style: '--d:6' },
       h('a', p.url.startsWith('mailto:')
