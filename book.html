@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Schedule a conversation with Prince Saah about AI consulting and digital product ideas.">
+  <link rel="canonical" href="https://createwithprince.com/book.html">
+  <title>Book a conversation | Create With Prince</title>
+  <link rel="stylesheet" href="booking.css">
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
+  <script src="booking.js" defer></script>
+</head>
+<body>
+<header><a href="./">Create With Prince</a><a href="./contact.html">Send a message</a></header>
+<main>
+  <div class="lead"><p class="eyebrow">A conversation, to start</p><h1>Let’s make<br><em>time</em> for it.</h1><p>Have a problem, an idea, or a question about AI? Choose a time that works for you and let’s talk.</p></div>
+  <section class="scheduler" aria-labelledby="scheduler-heading">
+    <div class="scheduler-head"><div><p class="eyebrow">01 / Find a time</p><h2 id="scheduler-heading">Choose your meeting</h2></div><p id="timezone" class="note"></p></div>
+    <div class="controls"><label>Meeting length<select id="duration"><option value="30">30 minutes</option><option value="45">45 minutes</option><option value="60">60 minutes</option></select></label><label>Date<input id="date" type="date" required></label></div>
+    <p id="slots-status" class="note" role="status" aria-live="polite">Choose a day to see available times.</p><div id="slots" class="slots" aria-label="Available times"></div>
+    <form id="booking" hidden novalidate>
+      <div class="section-line"><p class="eyebrow">02 / Your details</p><p id="selected" class="chosen"></p></div>
+      <label for="name">Your name</label><input id="name" name="name" autocomplete="name" maxlength="120" required>
+      <label for="email">Your email</label><input id="email" name="email" type="email" autocomplete="email" maxlength="254" required>
+      <div class="trap" aria-hidden="true"><label for="website">Leave this field empty</label><input id="website" name="website" tabindex="-1" autocomplete="off"></div>
+      <div id="verification"></div><p id="booking-status" role="status" aria-live="polite"></p><button id="submit" type="submit" disabled>Confirm meeting <span aria-hidden="true">↗</span></button>
+    </form>
+    <div id="confirmation" class="confirmation" role="status" aria-live="polite" hidden></div>
+  </section>
+</main><footer><span>Prince Saah · Minneapolis, Minnesota</span><a href="./">Back to the portfolio</a></footer>
+</body></html>

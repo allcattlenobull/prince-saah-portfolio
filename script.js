@@ -260,6 +260,8 @@ function fill(p) {
         : { className: 'sol-link', href: p.url, target: '_blank', rel: 'noopener noreferrer' }, p.linkText)) : null,
     p.id === 'me' ? h('div', { style: '--d:6' },
       h('a', { className: 'sol-link', href: 'consulting.html' }, 'AI consulting and project work')) : null,
+    p.id === 'me' ? h('div', { style: '--d:6' },
+      h('a', { className: 'sol-link', href: 'book.html' }, 'Book a conversation')) : null,
     h('div', { className: 'sol-foot', style: '--d:7' },
       h('span', {}, 'PRINCE SAAH'),
       p.id === 'me' ? null : h('a', { href: CONTACT_LINK }, 'CONTACT PRINCE')
