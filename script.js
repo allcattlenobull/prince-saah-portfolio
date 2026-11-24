@@ -4,41 +4,51 @@ const CONTACT_LINK = 'mailto:' + CONTACT_EMAIL;
 const projects = [
   {
     id: 'hiring', tint: '#eef3ff',
-    problem: 'How can we make hiring less overwhelming?',
+    problem: 'How can we make hiring more thoughtful and less overwhelming?',
     category: 'People and hiring', title: 'UMN Talent Workspace', status: 'Local prototype',
-    description: 'An AI-assisted hiring workspace designed around the University of Minnesota’s hiring process. The local demo explores support for job design, classification, compensation, and search planning.',
-    detail: 'The concept keeps people in control: the AI assists with drafting and recommendations while hiring professionals retain the decisions.'
+    description: 'A hiring workspace that helps managers move from an open position to a more thoughtful, structured search.',
+    why: 'Hiring managers have to turn an evolving business need into a clear role, navigate classification and compensation, and plan a fair search. Those steps are often scattered across documents, tools, and people.',
+    built: 'This local pilot for the University of Minnesota brings role intake, job classification, compensation, and search planning into a guided workflow. AI helps draft and surface recommendations; hiring professionals keep the decisions.',
+    value: 'The aim is to give managers a clearer path through a complex process, while helping teams spend more attention on the people and judgment that hiring requires.'
   },
   {
     id: 'mwana', tint: '#ebfaf0',
-    problem: 'How can a small practice keep its business organized?',
+    problem: 'How can a small practice spend less time managing the business?',
     category: 'Small business operations', title: 'Mwana Therapy', status: 'Deployed',
-    description: 'A practical administrative workspace for a small therapy practice, bringing transactions, linked accounting records, and a general ledger into one place.',
-    detail: 'Built and refined with AI assistance around the day-to-day needs of the practice.',
+    description: 'A public website and administrative workspace built around the everyday needs of a small therapy practice.',
+    why: 'Running a practice means caring for people while keeping up with a website, payments, expenses, invoices, and records. For a small team, that administrative work can crowd out time and attention.',
+    built: 'Mwana brings its public website and an admin workspace together. The workspace supports editing the site, tracking business transactions and invoices, and organizing accounting records.',
+    value: 'The goal is to make the business side more manageable, so the people running the practice can devote more energy to the families they serve.',
     url: 'https://www.mwanatherapy.com/', linkText: 'Visit Mwana Therapy'
   },
   {
     id: 'called', tint: '#fff4e2',
-    problem: 'How do you find a career that fits?',
+    problem: 'How can people find work that fits who they are?',
     category: 'Career exploration', title: 'Called', status: 'Live',
-    description: 'A career-discovery experience that helps people explore their strengths, consider possibilities, and make more informed decisions about what comes next.',
-    detail: 'The goal is to help people explore their options and make their own choices.',
+    description: 'A free career-discovery experience connecting self-understanding, purpose, and practical next steps.',
+    why: 'Choosing a direction can feel like choosing a lifetime in one decision. Students and career changers need room to explore what matters to them alongside the realities of work, training, and pay.',
+    built: 'Called combines guided reflection with career information, comparisons, and ways to try possibilities. It helps people gather evidence about themselves and the paths they are considering.',
+    value: 'The aim is to make career exploration more accessible and help people choose their next step with greater clarity and agency.',
     url: 'https://allcattlenobull.github.io/called/', linkText: 'Visit Called'
   },
   {
     id: 'acnb', tint: '#f4f2e8',
-    problem: 'How can research lead to clearer decisions?',
-    category: 'Investment research', title: 'All Cattle No Bull', status: 'Ongoing',
-    description: 'An independent portfolio management platform combining structured market analysis, research workflows, and AI-assisted decision support.',
-    detail: 'A place to bring research, data, and a disciplined decision process together.',
+    problem: 'How can small private funds manage investments and serve investors in one place?',
+    category: 'Fund operations and investing', title: 'All Cattle No Bull', status: 'In development',
+    description: 'An AI-assisted fund platform envisioned for small private funds, bringing investment workflows and the investor experience together.',
+    why: 'Small fund teams must research opportunities, make and track decisions, manage operations, and communicate with investors. Doing that across disconnected tools creates work and makes it harder to keep a clear record.',
+    built: 'The platform brings structured research, portfolio monitoring, and AI-assisted fund workflows into one system. An earlier version also includes an investor portal for sharing fund information and documents. The current v2 demo focuses on an AI-managed paper-trading fund; its investor portal is part of the broader platform vision.',
+    value: 'The vision is to give small fund teams a more coherent way to run their work and give investors a dedicated place to stay informed.',
     url: 'https://allcattlenobull.com/', linkText: 'Visit All Cattle No Bull'
   },
   {
     id: 'him', tint: '#ffeded',
-    problem: 'What if a league had its own home for data and stories?',
+    problem: 'What if fantasy leagues had a home worthy of their stories?',
     category: 'Sports and data', title: 'The Edge', status: 'Live',
-    description: 'A fantasy football platform bringing league sites, draft rooms, trade tools, and player analysis together.',
-    detail: 'Built to give fantasy communities a home for their leagues and tools for their decisions.',
+    description: 'A fantasy football platform that gives leagues a home for their history, tools, and shared moments.',
+    why: 'A league is more than a weekly score. Trades, rivalries, drafts, and seasons build a shared history that can get lost across apps, chats, and spreadsheets.',
+    built: 'The Edge brings league sites, draft rooms, trade tools, player analysis, and league history together around the communities that use them.',
+    value: 'It gives commissioners and managers a richer way to make decisions, revisit their history, and enjoy the game together.',
     url: 'https://theedge.football/', linkText: 'Visit The Edge'
   },
   {
@@ -139,6 +149,20 @@ function buildProjectViews(id) {
   );
 }
 
+function buildProjectStory(p) {
+  if (!p.why) return null;
+  const sections = [
+    ['Why it exists', p.why],
+    ['What I built', p.built],
+    ['The value', p.value]
+  ];
+  return h('section', { className: 'project-story', style: '--d:5', 'aria-label': 'Project story' },
+    ...sections.map(([title, body]) => h('article', { className: 'story-part' },
+      h('h3', {}, title), h('p', {}, body)
+    ))
+  );
+}
+
 /* ---------- Build the desks ---------- */
 const pcs = projects.map((p, i) => {
   const ink = h('span', { className: 'txt' });
@@ -234,6 +258,7 @@ let pushed = false;
 function fill(p) {
   const screens = buildProjectScreens(p.id);
   const views = buildProjectViews(p.id);
+  const story = buildProjectStory(p);
   sol.replaceChildren(...[
     h('div', { className: 'sol-q-wrap', style: '--d:0' }, h('p', { className: 'sol-q' }, p.problem)),
     h('p', { className: 'sol-kicker', style: '--d:2' },
@@ -242,7 +267,8 @@ function fill(p) {
     ),
     h('h2', { id: 'sol-title', style: '--d:3' }, p.title),
     h('p', { className: 'sol-lead', style: '--d:4' }, p.description),
-    h('p', { className: 'sol-detail', style: '--d:5' }, p.detail),
+    p.detail ? h('p', { className: 'sol-detail', style: '--d:5' }, p.detail) : null,
+    story,
     screens,
     views,
     p.url ? h('div', { style: '--d:6' },
