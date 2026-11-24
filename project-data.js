@@ -116,7 +116,7 @@ window.PORTFOLIO_PROJECTS = [
     "title": "Prince Saah",
     "description": "I look for the problems people quietly put up with, then build practical tools around them.",
     "detail": "AI is a collaborator in the work. People stay in charge of the decisions.",
-    "url": "mailto:saah.pc@gmail.com",
-    "linkText": "Email Prince"
+    "url": "contact.html",
+    "linkText": "Contact Prince"
   }
 ];
