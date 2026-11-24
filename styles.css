@@ -1,6 +1,6 @@
 :root {
   --ease: cubic-bezier(.7, 0, .2, 1);
-  --w: min(80vw, 660px);
+  --w: min(80vw, 660px, 90vh);
   --gap: min(72vw, 760px);
   --tint: #ffffff;
 }
@@ -322,4 +322,21 @@ button { font: inherit; color: inherit; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; transition-delay: 0s !important; }
+}
+
+@supports (height: 100dvh) {
+  :root { --w: min(80vw, 660px, 90dvh); }
+  .portal.open { height: 100dvh !important; }
+}
+@media (pointer: coarse), (max-width: 800px) {
+  .dots { bottom: calc(env(safe-area-inset-bottom) + 15px); gap: 0; }
+  .dot { width: 44px; height: 44px; background: transparent; }
+  .dot::before { inset: auto; left: 50%; top: 50%; width: 6px; height: 6px; border-radius: 50%; background: #626262; transform: translate(-50%,-50%); }
+  .dot[aria-current="true"] { background: transparent; box-shadow: none; transform: none; }
+  .dot[aria-current="true"]::before { background: var(--tint); box-shadow: 0 0 12px var(--tint); transform: translate(-50%,-50%) scale(1.25); }
+}
+@media (max-width: 480px) {
+  .sol h2 { font-size: clamp(38px, 11vw, 50px); overflow-wrap: anywhere; }
+  .sol-foot { flex-wrap: wrap; line-height: 1.7; }
+  .sol-link { min-height: 48px; max-width: 100%; }
 }
