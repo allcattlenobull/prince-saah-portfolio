@@ -2,33 +2,71 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#000000">
   <meta name="description" content="Contact Prince Saah about AI consulting, digital products, or a problem you want to solve.">
   <link rel="canonical" href="https://createwithprince.com/contact.html">
   <meta property="og:title" content="Contact Prince | Create With Prince">
   <meta property="og:description" content="Contact Prince Saah about AI consulting, digital products, or a problem you want to solve.">
   <meta property="og:type" content="website"><meta property="og:url" content="https://createwithprince.com/contact.html">
   <title>Contact Prince | Create With Prince</title>
-  <link rel="stylesheet" href="contact.css?v=20261124-mobile">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css?v=20261125">
+  <link rel="stylesheet" href="contact.css?v=20261125">
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
+  <script src="site.js?v=20261125" defer></script>
   <script src="contact.js" defer></script>
 </head>
 <body>
-  <header><a href="./">Create With Prince</a><a href="./">Back to the portfolio</a></header>
-  <main>
-    <p class="eyebrow">Have a problem worth solving?</p>
-    <h1>Let’s make something useful.</h1>
-    <p class="intro">Tell me a little about what you’re working on. You don’t need to have it all figured out.</p>
-    <p>Prefer to talk? <a href="book.html">Book a conversation</a>.</p>
-    <form id="contact" novalidate>
-      <label for="name">Your name</label><input id="name" name="name" autocomplete="name" maxlength="120" required>
-      <label for="email">Your email</label><input id="email" name="email" type="email" autocomplete="email" maxlength="254" required>
-      <label for="message">What’s on your mind?</label><textarea id="message" name="message" minlength="10" maxlength="5000" rows="7" required></textarea>
+<header class="site-head">
+  <div class="wrap">
+    <a class="mark" href="./">create with prince</a>
+    <button class="menu-btn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="site-nav"><span></span></button>
+    <nav class="nav" id="site-nav" aria-label="Main">
+      <a href="./">Work</a>
+      <a href="consulting.html">Consulting</a>
+      <a href="contact.html" aria-current="page">Contact</a>
+      <a class="cta" href="book.html">Book a call</a>
+    </nav>
+  </div>
+</header>
+<main>
+<section class="hero">
+  <div class="desk">
+    <span class="bezel"><span class="screen"><h1 class="screen-q">What problem are you trying to solve?</h1></span></span>
+    <span class="neck"></span><span class="foot"></span>
+  </div>
+  <p class="hero-sub">You don’t need to have it all figured out. Tell me a little, and I’ll write back.</p>
+</section>
+<section class="band">
+  <div class="wrap split">
+    <div>
+      <p class="label">Send a message</p>
+      <h2 class="title">Tell me what you’re working on.</h2>
+      <p class="lede muted" style="margin-top:20px">An idea, a frustrating process, a question about AI. It all starts the same way.</p>
+      <div class="aside">
+        <p class="step-q">Prefer to talk?</p>
+        <p class="muted">Pick a time for a 30, 45, or 60 minute conversation.</p>
+        <a class="button ghost" href="book.html">Book a call</a>
+      </div>
+    </div>
+    <form id="contact" class="panel" novalidate>
+      <div class="field"><label for="name">Your name</label><input id="name" name="name" autocomplete="name" maxlength="120" required></div>
+      <div class="field"><label for="email">Your email</label><input id="email" name="email" type="email" autocomplete="email" maxlength="254" required></div>
+      <div class="field"><label for="message">What’s on your mind?</label><textarea id="message" name="message" minlength="10" maxlength="5000" rows="7" required></textarea></div>
       <div class="trap" aria-hidden="true"><label for="website">Leave this field empty</label><input id="website" name="website" tabindex="-1" autocomplete="off"></div>
       <div id="verification"></div>
       <p class="status" id="status" role="status" aria-live="polite">Loading the contact form…</p>
-      <button type="submit" disabled>Send your message</button>
+      <button class="button" type="submit" disabled>Send your message</button>
     </form>
-  </main>
+  </div>
+</section>
+</main>
+<footer class="site-foot slim">
+  <div class="wrap">
+    <div class="foot-row"><span>Prince Saah · Minneapolis, Minnesota</span><nav aria-label="Footer"><a href="./">Work</a><a href="consulting.html">Consulting</a><a href="contact.html">Contact</a><a href="book.html">Book a call</a></nav></div>
+  </div>
+</footer>
 </body>
 </html>
