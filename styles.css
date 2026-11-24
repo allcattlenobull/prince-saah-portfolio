@@ -212,19 +212,77 @@ button { font: inherit; color: inherit; }
 .sol > .sol-lead { max-width: 760px; font-size: clamp(19px, 2.4vw, 25px); line-height: 1.42; letter-spacing: -.012em; margin-bottom: 20px; text-align: center; }
 .sol > .sol-detail { max-width: 680px; font-size: clamp(16px, 1.8vw, 18px); line-height: 1.6; color: rgba(0,0,0,.62); text-align: center; }
 
+/* the story: the mess, the build, the difference */
 .project-story {
-  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(24px, 3vw, 48px);
-  margin-top: clamp(48px, 8vh, 80px); padding-top: 26px; border-top: 1px solid rgba(0,0,0,.16);
+  max-width: 760px !important;
+  margin-top: clamp(56px, 10vh, 110px);
+  text-align: center;
 }
-.story-part h3 {
-  margin-bottom: 14px; font-family: 'Space Mono', monospace; font-size: 11px;
-  line-height: 1.4; letter-spacing: .11em; text-transform: uppercase; color: rgba(0,0,0,.58);
+.story-why, .story-built {
+  font-size: clamp(16px, 1.9vw, 19px); line-height: 1.7;
+  color: rgba(0,0,0,.72); max-width: 60ch; margin: 0 auto;
 }
-.story-part p { font-size: 16px; line-height: 1.7; color: rgba(0,0,0,.82); }
-@media (max-width: 760px) {
-  .project-story { grid-template-columns: 1fr; gap: 30px; }
-  .story-part p { max-width: 60ch; }
+
+.tray {
+  position: relative;
+  margin: clamp(44px, 8vh, 80px) auto;
+  max-width: 560px;
+  border-radius: 14px;
+  border: 1px solid transparent;
+  background: transparent;
+  transition: border-color .8s var(--ease) .5s, background .8s var(--ease) .5s, box-shadow .8s var(--ease) .5s;
 }
+.tray-bar {
+  display: flex; align-items: center; gap: 6px;
+  padding: 12px 14px;
+  border-bottom: 1px solid transparent;
+  opacity: 0;
+  transition: opacity .6s var(--ease) .7s, border-color .6s var(--ease) .7s;
+}
+.tray-bar i { width: 9px; height: 9px; border-radius: 50%; background: rgba(0,0,0,.14); }
+.tray-bar span {
+  flex: 1; margin-right: 33px; text-align: center;
+  font: 11px/1 'Space Mono', monospace; color: rgba(0,0,0,.5);
+}
+.tray-grid {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px;
+  padding: 16px;
+}
+.scrap {
+  display: block; padding: 13px 10px;
+  font: 13px/1.25 'Space Mono', monospace; color: #1a1a1a;
+  background: #fff;
+  border-radius: 3px;
+  box-shadow: 0 1px 0 rgba(0,0,0,.06), 0 8px 18px rgba(0,0,0,.09);
+  transform: translate(var(--x), var(--y)) rotate(var(--r));
+  transition: transform 1s var(--ease), border-radius 1s var(--ease), box-shadow 1s var(--ease), background 1s;
+  transition-delay: calc(var(--i) * 70ms);
+}
+.tray.sorted {
+  border-color: rgba(0,0,0,.14);
+  background: color-mix(in srgb, #fff 55%, transparent);
+  box-shadow: 0 24px 60px rgba(0,0,0,.10);
+}
+.tray.sorted .tray-bar { opacity: 1; border-color: rgba(0,0,0,.1); }
+.tray.sorted .scrap {
+  transform: none; border-radius: 9px;
+  background: color-mix(in srgb, var(--tint) 60%, #fff);
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.08);
+}
+@media (max-width: 560px) {
+  .tray-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .scrap { transform: translate(calc(var(--x) * .45), calc(var(--y) * .6)) rotate(var(--r)); }
+}
+
+.story-value {
+  margin: clamp(64px, 12vh, 120px) auto 0;
+  max-width: 30ch;
+  min-height: 7.5em;
+  font-family: 'Space Mono', monospace;
+  font-size: clamp(19px, 2.6vw, 28px); line-height: 1.4; letter-spacing: -.02em;
+  color: #0a0a0a; text-align: left;
+}
+.story-value .caret { display: inline-block; width: .55em; height: 1.05em; margin-left: .06em; vertical-align: -.17em; background: currentColor; animation: blink 1.05s steps(1) infinite; }
 
 .sol-link {
   display: inline-flex; align-items: center; gap: 12px;
