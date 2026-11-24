@@ -322,6 +322,8 @@ function fill(p) {
       h('a', p.url.startsWith('mailto:')
         ? { className: 'sol-link', href: p.url }
         : { className: 'sol-link', href: p.url, target: '_blank', rel: 'noopener noreferrer' }, p.linkText)) : null,
+    p.id === 'me' ? h('div', { style: '--d:6' },
+      h('a', { className: 'sol-link', href: 'consulting.html' }, 'AI consulting and project work')) : null,
     h('div', { className: 'sol-foot', style: '--d:7' },
       h('span', {}, 'PRINCE SAAH'),
       p.id === 'me' ? null : h('a', { href: CONTACT_LINK }, 'EMAIL PRINCE')
