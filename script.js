@@ -4,7 +4,8 @@ const CONTACT_LINK = 'mailto:' + CONTACT_EMAIL;
 const projects = [
   {
     id: 'hiring', tint: '#eef3ff',
-    problem: 'How can we make hiring more thoughtful and less overwhelming?',
+    problem: 'What if every hiring manager had an AI talent acquisition partner to make hiring less overwhelming?',
+    scraps: ['business need', 'role intake', 'classification', 'compensation', 'search plan', 'approvals'],
     category: 'People and hiring', title: 'UMN Talent Workspace', status: 'Local prototype',
     description: 'A hiring workspace that helps managers move from an open position to a more thoughtful, structured search.',
     why: 'Hiring managers have to turn an evolving business need into a clear role, navigate classification and compensation, and plan a fair search. Those steps are often scattered across documents, tools, and people.',
@@ -14,6 +15,7 @@ const projects = [
   {
     id: 'mwana', tint: '#ebfaf0',
     problem: 'How can a small practice spend less time managing the business?',
+    scraps: ['website', 'payments', 'expenses', 'invoices', 'records', 'site edits'],
     category: 'Small business operations', title: 'Mwana Therapy', status: 'Deployed',
     description: 'A public website and administrative workspace built around the everyday needs of a small therapy practice.',
     why: 'Running a practice means caring for people while keeping up with a website, payments, expenses, invoices, and records. For a small team, that administrative work can crowd out time and attention.',
@@ -24,6 +26,7 @@ const projects = [
   {
     id: 'called', tint: '#fff4e2',
     problem: 'How can people find work that fits who they are?',
+    scraps: ['strengths', 'values', 'career options', 'training', 'pay', 'next steps'],
     category: 'Career exploration', title: 'Called', status: 'Live',
     description: 'A free career-discovery experience connecting self-understanding, purpose, and practical next steps.',
     why: 'Choosing a direction can feel like choosing a lifetime in one decision. Students and career changers need room to explore what matters to them alongside the realities of work, training, and pay.',
@@ -33,7 +36,8 @@ const projects = [
   },
   {
     id: 'acnb', tint: '#f4f2e8',
-    problem: 'How can small private funds manage investments and serve investors in one place?',
+    problem: 'What if a small fund had an AI team to research, decide, and keep investors in the loop?',
+    scraps: ['research', 'decisions', 'portfolio', 'operations', 'investor updates', 'documents'],
     category: 'Fund operations and investing', title: 'All Cattle No Bull', status: 'In development',
     description: 'An AI-assisted fund platform envisioned for small private funds, bringing investment workflows and the investor experience together.',
     why: 'Small fund teams must research opportunities, make and track decisions, manage operations, and communicate with investors. Doing that across disconnected tools creates work and makes it harder to keep a clear record.',
@@ -43,7 +47,8 @@ const projects = [
   },
   {
     id: 'him', tint: '#ffeded',
-    problem: 'What if fantasy leagues had a home worthy of their stories?',
+    problem: 'What if your fantasy football league had a home worthy of its stories?',
+    scraps: ['league history', 'trades', 'drafts', 'rivalries', 'player analysis', 'group chats'],
     category: 'Sports and data', title: 'The Edge', status: 'Live',
     description: 'A fantasy football platform that gives leagues a home for their history, tools, and shared moments.',
     why: 'A league is more than a weekly score. Trades, rivalries, drafts, and seasons build a shared history that can get lost across apps, chats, and spreadsheets.',
@@ -149,18 +154,60 @@ function buildProjectViews(id) {
   );
 }
 
+// The story is told without headings: the mess, the build, the difference.
+let storyObserver, valueTimer;
+
 function buildProjectStory(p) {
   if (!p.why) return null;
-  const sections = [
-    ['Why it exists', p.why],
-    ['What I built', p.built],
-    ['The value', p.value]
-  ];
-  return h('section', { className: 'project-story', style: '--d:5', 'aria-label': 'Project story' },
-    ...sections.map(([title, body]) => h('article', { className: 'story-part' },
-      h('h3', {}, title), h('p', {}, body)
-    ))
+  const rnd = (a, b) => a + Math.random() * (b - a);
+  const tray = h('div', { className: 'tray', 'aria-hidden': 'true' },
+    h('div', { className: 'tray-bar' }, h('i'), h('i'), h('i'), h('span', {}, p.title)),
+    h('div', { className: 'tray-grid' },
+      ...p.scraps.map((t, i) => h('span', {
+        className: 'scrap',
+        style: `--x:${rnd(-70, 70).toFixed(0)}px;--y:${rnd(-60, 60).toFixed(0)}px;--r:${rnd(-16, 16).toFixed(1)}deg;--i:${i}`
+      }, t))
+    )
   );
+  const typed = h('span', { className: 'typed', 'aria-hidden': 'true' });
+  const value = h('p', { className: 'story-value' },
+    h('span', { className: 'sr-only' }, p.value), typed, h('span', { className: 'caret', 'aria-hidden': 'true' }));
+  value._typed = typed; value._text = p.value;
+
+  return h('section', { className: 'project-story', style: '--d:5', 'aria-label': 'Project story' },
+    h('p', { className: 'story-why' }, p.why),
+    tray,
+    h('p', { className: 'story-built' }, p.built),
+    value
+  );
+}
+
+function typeValue(el) {
+  if (el._done) return;
+  el._done = true;
+  const text = el._text;
+  if (reduce) { el._typed.textContent = text; el.classList.add('done'); return; }
+  let n = 0;
+  const step = () => {
+    el._typed.textContent = text.slice(0, ++n);
+    if (n < text.length) valueTimer = setTimeout(step, 14 + Math.random() * 26 + (text[n - 1] === ',' ? 140 : 0));
+    else el.classList.add('done');
+  };
+  step();
+}
+
+function watchStory() {
+  if (storyObserver) storyObserver.disconnect();
+  clearTimeout(valueTimer);
+  storyObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      if (e.target.classList.contains('tray')) e.target.classList.add('sorted');
+      if (e.target.classList.contains('story-value')) typeValue(e.target);
+      storyObserver.unobserve(e.target);
+    });
+  }, { root: sol, rootMargin: '0px 0px -30% 0px', threshold: .6 });
+  sol.querySelectorAll('.tray, .story-value').forEach(el => storyObserver.observe(el));
 }
 
 /* ---------- Build the desks ---------- */
@@ -281,6 +328,7 @@ function fill(p) {
     )
   ].filter(Boolean));
   sol.scrollTop = 0;
+  watchStory();
 }
 
 function screenOf(i) { return pcs[i].querySelector('.screen'); }
