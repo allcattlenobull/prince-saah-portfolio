@@ -1,4 +1,5 @@
-const LINKEDIN = 'https://www.linkedin.com/in/prince-saah-250b41a5';
+const CONTACT_EMAIL = 'saah.pc@gmail.com';
+const CONTACT_LINK = 'mailto:' + CONTACT_EMAIL;
 
 const projects = [
   {
@@ -33,10 +34,9 @@ const projects = [
   {
     id: 'him', tint: '#ffeded',
     problem: 'What if a league had its own home for data and stories?',
-    category: 'Sports and data', title: 'HIM Dynasty', status: 'Live',
+    category: 'Sports and data', title: 'HIM Dynasty', status: 'Ongoing',
     description: 'A fantasy football league experience bringing standings, league history, trade tools, and player analysis together.',
-    detail: 'Designed to give a community a more engaging way to explore its league.',
-    url: 'https://allcattlenobull.github.io/himdynasty/', linkText: 'Explore HIM Dynasty'
+    detail: 'Designed to give a community a more engaging way to explore its league.'
   },
   {
     id: 'me', tint: '#ffffff',
@@ -44,7 +44,7 @@ const projects = [
     category: 'The person behind the screens', title: 'Prince Saah',
     description: 'I look for the problems people quietly put up with, then build practical tools around them.',
     detail: 'AI is a collaborator in the work. People stay in charge of the decisions.',
-    url: LINKEDIN, linkText: 'Connect on LinkedIn'
+    url: CONTACT_LINK, linkText: 'Email Prince'
   }
 ];
 
@@ -66,6 +66,31 @@ function h(tag, props = {}, ...kids) {
   }
   kids.flat().forEach(k => k != null && el.append(k));
   return el;
+}
+
+// Public pages are live project views, never reconstructed interface graphics.
+const PUBLIC_PROJECT_VIEWS = {
+  called: [
+    { label: 'Called home', url: 'https://www.walkyourcalling.com/' },
+    { label: 'Explore', url: 'https://www.walkyourcalling.com/explore/' },
+    { label: 'Career exploration', url: 'https://www.walkyourcalling.com/careers/' }
+  ]
+};
+
+function buildProjectViews(id) {
+  const items = PUBLIC_PROJECT_VIEWS[id];
+  if (!items || !items.length) return null;
+  return h('section', { className: 'real-views', style: '--d:6', 'aria-label': 'Live project views' },
+    h('p', { className: 'real-views-kicker' }, 'ACTUAL PROJECT VIEWS'),
+    h('p', { className: 'real-views-note' }, 'These are live public pages, not recreated mockups.'),
+    ...items.map(item => h('div', { className: 'real-view' },
+      h('div', { className: 'real-view-heading' },
+        h('strong', {}, item.label),
+        h('a', { href: item.url, target: '_blank', rel: 'noopener noreferrer' }, 'Open page')
+      ),
+      h('iframe', { src: item.url, title: item.label, loading: 'lazy', referrerPolicy: 'no-referrer' })
+    ))
+  );
 }
 
 /* ---------- Build the desks ---------- */
@@ -161,7 +186,7 @@ let openIndex = -1;
 let pushed = false;
 
 function fill(p) {
-  const mockup = document.getElementById('mockup-' + p.id);
+  const views = buildProjectViews(p.id);
   sol.replaceChildren(...[
     h('div', { className: 'sol-q-wrap', style: '--d:0' }, h('p', { className: 'sol-q' }, p.problem)),
     h('p', { className: 'sol-kicker', style: '--d:2' },
@@ -171,12 +196,14 @@ function fill(p) {
     h('h2', { id: 'sol-title', style: '--d:3' }, p.title),
     h('p', { className: 'sol-lead', style: '--d:4' }, p.description),
     h('p', { className: 'sol-detail', style: '--d:5' }, p.detail),
-    mockup ? mockup.content.firstElementChild.cloneNode(true) : null,
+    views,
     p.url ? h('div', { style: '--d:6' },
-      h('a', { className: 'sol-link', href: p.url, target: '_blank', rel: 'noopener noreferrer' }, p.linkText)) : null,
+      h('a', p.url.startsWith('mailto:')
+        ? { className: 'sol-link', href: p.url }
+        : { className: 'sol-link', href: p.url, target: '_blank', rel: 'noopener noreferrer' }, p.linkText)) : null,
     h('div', { className: 'sol-foot', style: '--d:7' },
       h('span', {}, 'PRINCE SAAH'),
-      p.id === 'me' ? null : h('a', { href: LINKEDIN, target: '_blank', rel: 'noopener noreferrer' }, 'LINKEDIN ↗')
+      p.id === 'me' ? null : h('a', { href: CONTACT_LINK }, 'EMAIL PRINCE')
     )
   ].filter(Boolean));
   sol.scrollTop = 0;
@@ -250,6 +277,7 @@ function close() {
     setTimeout(() => {
       portal.classList.remove('show');
       openIndex = -1;
+      sol.replaceChildren();
       pcs[active].focus({ preventScroll: true });
     }, DUR);
   }, reduce ? 0 : 220);
@@ -275,7 +303,7 @@ addEventListener('keydown', e => {
   if (openIndex >= 0) {
     if (e.key === 'Escape') { e.preventDefault(); requestClose(); }
     if (e.key === 'Tab') {               // keep focus inside the solution
-      const f = [...portal.querySelectorAll('a, button')];
+      const f = [...portal.querySelectorAll('a, button, iframe')];
       if (!f.length) return;
       const first = f[0], last = f[f.length - 1];
       if (e.shiftKey && (document.activeElement === first || document.activeElement === sol)) { e.preventDefault(); last.focus(); }
