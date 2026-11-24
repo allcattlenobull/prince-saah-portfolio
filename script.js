@@ -161,6 +161,7 @@ let openIndex = -1;
 let pushed = false;
 
 function fill(p) {
+  const mockup = document.getElementById('mockup-' + p.id);
   sol.replaceChildren(...[
     h('div', { className: 'sol-q-wrap', style: '--d:0' }, h('p', { className: 'sol-q' }, p.problem)),
     h('p', { className: 'sol-kicker', style: '--d:2' },
@@ -170,6 +171,7 @@ function fill(p) {
     h('h2', { id: 'sol-title', style: '--d:3' }, p.title),
     h('p', { className: 'sol-lead', style: '--d:4' }, p.description),
     h('p', { className: 'sol-detail', style: '--d:5' }, p.detail),
+    mockup ? mockup.content.firstElementChild.cloneNode(true) : null,
     p.url ? h('div', { style: '--d:6' },
       h('a', { className: 'sol-link', href: p.url, target: '_blank', rel: 'noopener noreferrer' }, p.linkText)) : null,
     h('div', { className: 'sol-foot', style: '--d:7' },
