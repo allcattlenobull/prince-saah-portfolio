@@ -18,8 +18,8 @@ function h(tag, props = {}, ...kids) {
 
 const PROJECT_SCREENS = {
   hiring: [
-    { label: 'Role intake · pilot demo', src: 'assets/screens/umn-intake.png' },
-    { label: 'Job classification · pilot demo', src: 'assets/screens/umn-classification.png' }
+    { label: 'Role intake · pilot demo', src: 'assets/screens/talent-intake.png' },
+    { label: 'Job classification · pilot demo', src: 'assets/screens/talent-classification.png' }
   ],
   mwana: [
     { label: 'Public website', src: 'assets/screens/mwana-home.png' },
