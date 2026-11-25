@@ -13,11 +13,11 @@ window.PORTFOLIO_PROJECTS = [
       "approvals"
     ],
     "category": "People and hiring",
-    "title": "UMN Talent Workspace",
+    "title": "Talent Workspace",
     "status": "Local prototype",
     "description": "A hiring workspace that helps managers move from an open position to a more thoughtful, structured search.",
     "why": "Hiring managers have to turn an evolving business need into a clear role, navigate classification and compensation, and plan a fair search. Those steps are often scattered across documents, tools, and people.",
-    "built": "This local pilot for the University of Minnesota brings role intake, job classification, compensation, and search planning into a guided workflow. AI helps draft and surface recommendations; hiring professionals keep the decisions.",
+    "built": "This local pilot for a large organization brings role intake, job classification, compensation, and search planning into a guided workflow. AI helps draft and surface recommendations; hiring professionals keep the decisions.",
     "value": "The aim is to give managers a clearer path through a complex process, while helping teams spend more attention on the people and judgment that hiring requires."
   },
   {
