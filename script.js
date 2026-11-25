@@ -258,13 +258,15 @@ function fill(p) {
       h('a', p.url === CONTACT_LINK || p.url.startsWith('mailto:')
         ? { className: 'sol-link', href: p.url }
         : { className: 'sol-link', href: p.url, target: '_blank', rel: 'noopener noreferrer' }, p.linkText)) : null,
-    p.id === 'me' ? h('div', { style: '--d:6' },
-      h('a', { className: 'sol-link', href: 'consulting.html' }, 'AI consulting and project work')) : null,
-    p.id === 'me' ? h('div', { style: '--d:6' },
-      h('a', { className: 'sol-link', href: 'book.html' }, 'Book a conversation')) : null,
+    p.id === 'me' ? h('div', { className: 'sol-actions', style: '--d:6' },
+      h('a', { className: 'sol-link', href: 'book.html' }, 'Book a call'),
+      h('a', { className: 'sol-link ghost', href: 'consulting.html' }, 'How I work')) : null,
     h('div', { className: 'sol-foot', style: '--d:7' },
-      h('span', {}, 'PRINCE SAAH'),
-      p.id === 'me' ? null : h('a', { href: CONTACT_LINK }, 'CONTACT PRINCE')
+      h('span', {}, 'create with prince'),
+      h('nav', { 'aria-label': 'Site' },
+        h('a', { href: 'consulting.html' }, 'Consulting'),
+        h('a', { href: CONTACT_LINK }, 'Contact'),
+        h('a', { href: 'book.html' }, 'Book a call'))
     )
   ].filter(Boolean));
   sol.scrollTop = 0;

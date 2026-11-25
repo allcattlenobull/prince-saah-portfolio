@@ -298,10 +298,14 @@ button { font: inherit; color: inherit; }
   display: flex; justify-content: space-between; gap: 16px;
   margin-top: clamp(80px, 14vh, 140px); padding-top: 20px;
   border-top: 1px solid rgba(0,0,0,.12);
-  font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: .14em;
+  font-family: 'Space Mono', monospace; font-size: 13px; letter-spacing: 0;
   color: rgba(0,0,0,.55);
 }
+.sol-foot nav { display: flex; flex-wrap: wrap; gap: 8px 22px; }
 .sol-foot a { color: inherit; text-decoration: none; }
+.sol-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; }
+.sol-actions .sol-link { margin-top: 14px; }
+.sol-link.ghost { background: transparent; color: #0a0a0a; box-shadow: inset 0 0 0 1px rgba(0,0,0,.25); }
 .sol-foot a:hover { color: #000; }
 
 .close {
