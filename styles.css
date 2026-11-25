@@ -25,11 +25,11 @@
 .stamp {
   position: absolute; right: -14px; bottom: -18px; z-index: 1;
   border: 3px solid var(--ink); border-radius: 6px; padding: 4px 11px 3px;
-  font: 900 15px/1.2 var(--head); letter-spacing: .05em; background: #fff;
+  font: 900 15px/1.2 var(--head); letter-spacing: .05em; background: var(--card);
   transform: rotate(-9deg);
 }
-.stamp.built { background: var(--hl); }
-.idea.pin { background: rgba(255,255,255,.65); border-style: dashed; box-shadow: none; }
+.stamp.built { background: var(--hl); color: var(--on-hl); }
+.idea.pin { background: color-mix(in srgb, var(--card) 65%, transparent); border-style: dashed; box-shadow: none; }
 .idea.pin .q { font-size: 30px; }
 .idea.lifted { transform: rotate(0deg) scale(1.08); box-shadow: 16px 18px 0 var(--ink); z-index: 4; }
 
@@ -62,7 +62,7 @@
 .sheet-scroll { position: absolute; inset: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; padding: clamp(16px, 5vh, 56px) 14px; }
 .story {
   position: relative; width: min(900px, 100%); margin: 0 auto; outline: none;
-  background: #fff; border: 2px solid var(--ink); box-shadow: 12px 12px 0 var(--ink);
+  background: var(--card); border: 2px solid var(--ink); box-shadow: 12px 12px 0 var(--ink);
   padding: clamp(28px, 6vw, 72px) clamp(22px, 6vw, 72px) clamp(32px, 5vw, 56px);
   transform: translateY(60px) rotate(-2.5deg) scale(.96); opacity: 0;
   transition: transform .55s var(--ease), opacity .35s var(--ease);
@@ -75,7 +75,7 @@
 }
 .sheet.open .sheet-close { opacity: 1; }
 .sheet-close:hover { transform: rotate(90deg); }
-.sheet-close span, .sheet-close span::before { position: absolute; left: 50%; top: 50%; width: 20px; height: 2.5px; background: var(--ink); }
+.sheet-close span, .sheet-close span::before { position: absolute; left: 50%; top: 50%; width: 20px; height: 2.5px; background: var(--on-hl); }
 .sheet-close span { transform: translate(-50%, -50%) rotate(45deg); }
 .sheet-close span::before { content: ''; transform: translate(-50%, -50%) rotate(90deg); }
 body.sheet-on { overflow: hidden; }
@@ -95,13 +95,13 @@ body.sheet-on { overflow: hidden; }
 .tray-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; padding: 4px 14px 16px; }
 .scrap {
   display: block; padding: 12px 10px; font: 700 21px/1.05 var(--hand); text-align: center;
-  background: #fff; border: 2px solid var(--ink); box-shadow: 3px 3px 0 var(--ink);
+  background: var(--card); border: 2px solid var(--ink); box-shadow: 3px 3px 0 var(--ink);
   transform: translate(var(--x), var(--y)) rotate(var(--r));
   transition: transform .9s var(--ease), background .6s; transition-delay: calc(var(--i) * 70ms);
 }
-.tray.sorted { border-color: var(--ink); border-style: solid; background: #FAFAFA; }
+.tray.sorted { border-color: var(--ink); border-style: solid; background: var(--wall); }
 .tray.sorted .tray-bar { opacity: 1; }
-.tray.sorted .scrap { transform: none; background: var(--hl); }
+.tray.sorted .scrap { transform: none; background: var(--hl); color: var(--on-hl); }
 @media (max-width: 560px) {
   .tray-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .scrap { transform: translate(calc(var(--x) * .4), calc(var(--y) * .5)) rotate(var(--r)); }
@@ -114,7 +114,7 @@ body.sheet-on { overflow: hidden; }
   margin-top: 56px; padding: 22px 24px; border: 2px solid var(--ink); background: var(--wall);
   font: inherit; color: inherit; text-align: left; cursor: pointer; transition: background .2s;
 }
-.story-next:hover { background: var(--hl); }
+.story-next:hover { background: var(--hl); color: var(--on-hl); }
 .story-next small { display: block; font: 700 22px/1 var(--hand); }
 .story-next b { display: block; margin-top: 6px; font: 900 22px/1.1 var(--head); letter-spacing: -.02em; }
 .story-next span[aria-hidden] { font: 900 28px/1 var(--head); }
