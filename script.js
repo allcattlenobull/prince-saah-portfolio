@@ -1,6 +1,7 @@
 // The idea wall: every problem is a card pinned up; tapping one opens its story.
 const CONTACT_LINK = 'contact.html';
-const projects = window.PORTFOLIO_PROJECTS || [];
+// Archived stories stay in the admin but never appear on the site.
+const projects = (window.PORTFOLIO_PROJECTS || []).filter(p => p && !p.archived);
 const $ = s => document.querySelector(s);
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -104,9 +105,11 @@ const stampFor = s => {
 };
 
 const ideasEl = $('#ideas');
+// More cards than pin spots: lay the whole wall out as a loose grid instead.
+if (wallProjects.length > SLOTS.length) ideasEl.closest('.wall').classList.add('crowded');
 const cards = {};
-function place(li, slot, i) {
-  if (!slot) { li.classList.add('more'); return; }
+function place(li, slot) {
+  if (!slot) return;
   li.style.setProperty('--top', slot.top + 'px');
   li.style[slot.side] = slot.at;
 }
@@ -127,7 +130,7 @@ wallProjects.forEach((p, i) => {
   const pin = h('a', { className: 'idea pin', href: CONTACT_LINK, style: `--r:${PIN_SLOT.r}deg` },
     h('span', { className: 'q' }, '+ Pin your problem here'));
   const li = h('li', {}, pin);
-  if (wallProjects.length <= SLOTS.length) place(li, PIN_SLOT); else li.classList.add('more');
+  if (wallProjects.length <= SLOTS.length) place(li, PIN_SLOT);
   ideasEl.append(li);
 }
 
