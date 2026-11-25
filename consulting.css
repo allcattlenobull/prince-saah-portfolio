@@ -1,12 +1,12 @@
 /* Consulting page: how I work, and the work pinned as cards. Shared look lives in site.css. */
 .steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 22px; }
-.steps li { background: #fff; border: 2px solid var(--ink); box-shadow: 6px 6px 0 var(--ink); padding: 24px 26px; }
+.steps li { background: var(--card); border: 2px solid var(--ink); box-shadow: 6px 6px 0 var(--ink); padding: 24px 26px; }
 .steps li:nth-child(1) { transform: rotate(-1deg); } .steps li:nth-child(2) { transform: rotate(.8deg); } .steps li:nth-child(3) { transform: rotate(-.6deg); }
 .steps p:not(.step-q) { color: var(--muted); max-width: 54ch; }
 .step-q { font: 700 clamp(28px, 3vw, 34px)/1.05 var(--hand); color: var(--ink); margin-bottom: 8px; }
 
 .work { list-style: none; margin: clamp(36px, 5vw, 56px) 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 30px 24px; }
-.work-row { background: #fff; border: 2px solid var(--ink); box-shadow: 6px 6px 0 var(--ink); padding: 24px; display: flex; flex-direction: column; gap: 16px; }
+.work-row { background: var(--card); border: 2px solid var(--ink); box-shadow: 6px 6px 0 var(--ink); padding: 24px; display: flex; flex-direction: column; gap: 16px; }
 .work-row:nth-child(odd) { transform: rotate(-1deg); } .work-row:nth-child(even) { transform: rotate(1deg); }
 .work-q { font: 700 28px/1.05 var(--hand); }
 .work-row h3 { font: 900 22px/1.1 var(--head); letter-spacing: -.02em; margin: 0 0 6px; }
