@@ -344,3 +344,30 @@ button { font: inherit; color: inherit; }
   .sol-foot { flex-wrap: wrap; line-height: 1.7; }
   .sol-link { min-height: 48px; max-width: 100%; }
 }
+
+/* ---------- Site menu (same as the other pages, see site.css) ---------- */
+.site-head { position: fixed; inset: 0 0 auto; z-index: 6; padding-top: env(safe-area-inset-top); color: #fff; font-family: 'DM Sans', system-ui, sans-serif; }
+.site-head .wrap { width: min(1120px, calc(100% - 48px)); margin-inline: auto; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 22px 0; }
+.site-head .mark { display: inline-flex; align-items: center; font: 700 13px/1 'Space Mono', ui-monospace, monospace; color: #fff; text-decoration: none; white-space: nowrap; }
+.site-head .mark::after { content: ''; width: .6em; height: 1.1em; margin-left: 5px; background: currentColor; animation: blink 1.05s steps(1) infinite; }
+.site-head .nav { display: flex; align-items: center; gap: 6px; }
+.site-head .nav a { font-size: 14px; text-decoration: none; padding: 10px 12px; border-radius: 99px; color: rgba(255,255,255,.7); transition: color .3s, background .3s; }
+.site-head .nav a:hover { color: #fff; }
+.site-head .nav a[aria-current="page"] { color: #fff; background: rgba(255,255,255,.1); }
+.site-head .nav .cta { background: #f4f6ff; color: #0b0b0b; font-weight: 600; margin-left: 6px; }
+.site-head .nav .cta:hover { color: #0b0b0b; box-shadow: 0 0 24px rgba(244,246,255,.45); }
+.site-head a:focus-visible, .site-head button:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+.menu-btn { display: none; }
+@media (max-width: 760px) {
+  .menu-btn { display: grid; place-items: center; width: 44px; height: 44px; margin-right: -10px; border: 0; background: none; color: #fff; cursor: pointer; }
+  .menu-btn span, .menu-btn span::before { display: block; width: 20px; height: 1.5px; background: currentColor; transition: transform .4s var(--ease); }
+  .menu-btn span { position: relative; box-shadow: 0 -6px 0 currentColor; }
+  .menu-btn span::before { content: ''; position: absolute; top: 6px; }
+  .site-head.open .menu-btn span { transform: rotate(45deg); box-shadow: none; }
+  .site-head.open .menu-btn span::before { transform: translateY(-6px) rotate(-90deg); }
+  .site-head .nav { position: fixed; inset: 0; z-index: -1; flex-direction: column; align-items: flex-start; justify-content: center; gap: 4px; padding: 0 28px; background: #000; opacity: 0; pointer-events: none; transition: opacity .35s var(--ease); }
+  .site-head.open .nav { opacity: 1; pointer-events: auto; }
+  .site-head .nav a { font-size: 30px; letter-spacing: -.03em; padding: 8px 0; color: rgba(255,255,255,.6); }
+  .site-head .nav a[aria-current="page"] { background: none; color: #fff; }
+  .site-head .nav .cta { margin: 22px 0 0; padding: 14px 24px; font-size: 18px; }
+}
