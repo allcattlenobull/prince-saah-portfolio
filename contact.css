@@ -1,8 +1,5 @@
 /* Contact page. Shared look lives in site.css. */
-.aside { margin-top: clamp(40px, 6vw, 64px); padding-top: 24px; border-top: 1px solid var(--line); display: grid; gap: 10px; justify-items: start; }
-.aside .button { margin-top: 8px; }
-.step-q { font: 400 20px/1.35 var(--mono); letter-spacing: -.02em; }
-.step-q::before { content: '> '; color: var(--muted); }
+.step-q { font: 700 30px/1.05 var(--hand); }
 .panel .button[type=submit] { margin-top: 8px; width: 100%; }
 #verification:not(:empty) { margin-top: 20px; }
 

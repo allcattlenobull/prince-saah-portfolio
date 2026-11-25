@@ -1,18 +1,19 @@
-/* Consulting page: the steps and the work list. Shared look lives in site.css. */
-.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: clamp(36px, 5vw, 56px); }
-.steps p:not(.step-q) { color: var(--muted); max-width: 52ch; }
-.step-q { font: 400 clamp(19px, 2vw, 22px)/1.35 var(--mono); letter-spacing: -.02em; color: var(--ink); margin-bottom: 10px; }
-.step-q::before { content: '> '; color: var(--muted); }
+/* Consulting page: how I work, and the work pinned as cards. Shared look lives in site.css. */
+.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 22px; }
+.steps li { background: #fff; border: 2px solid var(--ink); box-shadow: 6px 6px 0 var(--ink); padding: 24px 26px; }
+.steps li:nth-child(1) { transform: rotate(-1deg); } .steps li:nth-child(2) { transform: rotate(.8deg); } .steps li:nth-child(3) { transform: rotate(-.6deg); }
+.steps p:not(.step-q) { color: var(--muted); max-width: 54ch; }
+.step-q { font: 700 clamp(28px, 3vw, 34px)/1.05 var(--hand); color: var(--ink); margin-bottom: 8px; }
 
-.work { list-style: none; margin: clamp(40px, 6vw, 64px) 0 0; padding: 0; }
-.work-row {
-  display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(20px, 5vw, 80px);
-  padding: clamp(28px, 4vw, 40px) 0; border-top: 1px solid var(--line);
-}
-.work-q { font: 400 clamp(19px, 2.3vw, 26px)/1.35 var(--mono); letter-spacing: -.025em; text-wrap: balance; }
-.work-row h3 { font-size: 22px; letter-spacing: -.02em; margin: 0 0 6px; }
+.work { list-style: none; margin: clamp(36px, 5vw, 56px) 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 30px 24px; }
+.work-row { background: #fff; border: 2px solid var(--ink); box-shadow: 6px 6px 0 var(--ink); padding: 24px; display: flex; flex-direction: column; gap: 16px; }
+.work-row:nth-child(odd) { transform: rotate(-1deg); } .work-row:nth-child(even) { transform: rotate(1deg); }
+.work-q { font: 700 28px/1.05 var(--hand); }
+.work-row h3 { font: 900 22px/1.1 var(--head); letter-spacing: -.02em; margin: 0 0 6px; }
 .work-row .label { margin-bottom: 6px; }
-.step-in { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin-top: 8px; font-weight: 600; text-decoration: none; }
-.step-in::after { content: '→'; transition: transform .4s var(--ease); }
+.work-row .muted { font-size: 15px; line-height: 1.55; }
+.step-in { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin-top: 6px; font-weight: 700; text-decoration: none; }
+.step-in::after { content: '→'; transition: transform .3s var(--ease); }
 .step-in:hover::after { transform: translateX(4px); }
-@media (max-width: 760px) { .work-row { grid-template-columns: 1fr; gap: 14px; } }
+@media (max-width: 1000px) { .work { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .work { grid-template-columns: 1fr; } }
